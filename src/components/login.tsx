@@ -1,9 +1,8 @@
-import React from 'react';
+import React from 'react'
 import styled from '@emotion/styled'
 
 const Header = styled.h1`
   font-size: 32px;
-  display: inline;
 
   color: black;
   font-style: italic;
@@ -46,11 +45,18 @@ interface Props {
   handleUsernameChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Login: React.FC<Props> = ({ handleSubmit, handleUsernameChange }) => (
+export const Login: React.FC<Props> = ({
+  handleSubmit,
+  handleUsernameChange,
+}) => (
   <>
     <Header>&nbsp; collage.cool &nbsp;</Header>
     <Form onSubmit={handleSubmit}>
-      <Input type="text" placeholder="last.fm username" onChange={handleUsernameChange} />
+      <Input
+        type="text"
+        placeholder="last.fm username"
+        onChange={handleUsernameChange}
+      />
     </Form>
   </>
 )

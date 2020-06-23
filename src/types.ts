@@ -1,7 +1,7 @@
 export interface Album {
   artist: Artist
   '@attr': {
-    rank: string;
+    rank: string
   }
   image: Image[]
   playcount: string // numerical string, e.g., "5"

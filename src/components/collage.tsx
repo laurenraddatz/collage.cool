@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 
-import { Album } from './types'
+import { Album } from '../types'
 
 interface Props {
   albums: Album[]
@@ -9,10 +9,8 @@ interface Props {
 }
 
 export const Collage: React.FC<Props> = ({ albums, size }) => {
-  const artists = albums.map(a => a.name)
+  const artists = albums.map((a) => a.name)
   console.log(artists)
 
-  return (
-    <div>wassup world</div>
-  )
+  return <div>wassup world</div>
 }
