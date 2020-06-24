@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { Collage } from './collage'
 import { Login } from './login'
 
-const apiKey = process.env.REACT_APP_LASTFM_API_KEY
+const LASTFM_API_KEY = process.env.LASTFM_API_KEY
 
 const Main = styled.div`
   background-color: white;
@@ -25,10 +25,11 @@ const App = () => {
   const [error, setError] = useState(null)
   const [data, setData] = useState([])
 
-  const size = 4 // change later or automatically determine
+  // change later or automatically determine
+  const size = 4
   const period = '7day'
   // change limit if needed
-  const url = `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${apiKey}&period=${period}&format=json`
+  const url = `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUser(e.target.value)
