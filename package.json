@@ -9,7 +9,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "prettier": "prettier --write ."
+    "lint": "prettier --write ."
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
