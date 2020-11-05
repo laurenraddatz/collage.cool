@@ -33,4 +33,9 @@ module.exports = {
     }),
     new Dotenv(),
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true,
+  },
 }

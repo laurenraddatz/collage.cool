@@ -1,3 +1,4 @@
+import domtoimage from 'dom-to-image'
 import React from 'react'
 import styled from '@emotion/styled'
 
@@ -30,11 +31,13 @@ const Wrapper = styled.div<WrapperProps>`
 const Label = styled.div`
   z-index: 10;
   position: absolute;
+  top: 0;
+  left: 0;
   display: inline-block;
   padding: 0 4px 2px 4px;
 
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 10px;
   font-family: sans-serif;
   letter-spacing: 0.03rem;
@@ -48,7 +51,7 @@ const Image = styled.div<ImageProps>`
   width: ${ALBUM_SIZE}px;
 `
 
-export const Collage: React.FC<Props> = ({ albums, size = 5 }) => {
+export const Collage: React.FC<Props> = ({ albums, size = 3 }) => {
   const sizedAlbums = albums.slice(0, size * size)
 
   const width = size

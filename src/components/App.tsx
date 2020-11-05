@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { Collage } from './collage'
-import { Login } from './login'
-
-const LASTFM_API_KEY = process.env.LASTFM_API_KEY
+import CollagePage from './collagePage'
+import HomePage from './homePage'
 
 const Main = styled.div`
   background-color: white;
@@ -20,50 +19,17 @@ const Main = styled.div`
 `
 
 const App = () => {
-  const [user, setUser] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState([])
-
-  // change later or automatically determine
-  const size = 4
-  const period = '7day'
-  // change limit if needed
-  const url = `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
-
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setUser(e.target.value)
-
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      fetch(url)
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setIsLoaded(true)
-            setData(result.topalbums.album)
-          },
-          (error) => {
-            setIsLoaded(false)
-            setError(error)
-          }
-        )
-    },
-    [url]
-  )
-
   return (
-    <Main>
-      {!isLoaded ? (
-        <Login
-          handleSubmit={handleSubmit}
-          handleUsernameChange={handleUsernameChange}
-        />
-      ) : (
-        <Collage albums={data} />
-      )}
-    </Main>
+    <Router>
+      <Main>
+        <Switch>
+          <>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/collage?user=:user" component={CollagePage} />
+          </>
+        </Switch>
+      </Main>
+    </Router>
   )
 }
 
