@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter, useParams, RouteComponentProps } from 'react-router-dom'
+import { withRouter, useRouter } from 'next/router'
 
-import { Collage } from './collage'
+import { Collage } from '../src/components/collage'
 
 const LASTFM_API_KEY = process.env.LASTFM_API_KEY
 
-const CollagePage: React.FC<RouteComponentProps> = (props) => {
+const CollagePage: React.FC<any> = (props) => {
   const [data, setData] = useState([])
   const [error, setError] = useState(null)
-  const params = useParams()
+  const router = useRouter()
 
-  // @ts-ignore
-  const user = params.user
-
+  const user = router.query.user
   // change later or automatically determine
   const size = 4
   const period = '7day'

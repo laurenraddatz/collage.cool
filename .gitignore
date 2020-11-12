@@ -1,5 +1,6 @@
 # api keys
 .env
+.env.local
 
 # dependencies
 /node_modules
@@ -13,3 +14,7 @@
 yarn-debug.log*
 yarn-error.log*
 yarn.lock
+
+# next
+/.next/
+/out/
