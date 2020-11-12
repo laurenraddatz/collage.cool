@@ -1,5 +1,4 @@
 # api keys
-.env
 .env.local
 
 # dependencies
