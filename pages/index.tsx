@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
 import { Router, useRouter } from 'next/router'
 import Head from 'next/head'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 
-import { Collage } from '../src/components/collage'
-import { Login } from '../src/components/login'
+import { Login } from '../components/login'
 
 export const Main = styled.div`
   background-color: white;

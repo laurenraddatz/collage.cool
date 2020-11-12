@@ -2,7 +2,7 @@ import domtoimage from 'dom-to-image'
 import React, { useLayoutEffect, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { Album } from '../types'
+import { Album } from './types'
 
 const ALBUM_SIZE = 300 // 174 for large
 

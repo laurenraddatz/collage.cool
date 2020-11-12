@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app'
-import { Global, css } from '@emotion/core'
+import { css, Global } from '@emotion/core'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

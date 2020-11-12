@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import { withRouter, useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
-import { Collage } from '../src/components/collage'
+import { Collage } from '../components/collage'
 
 const LASTFM_API_KEY = process.env.LASTFM_API_KEY
 
