@@ -26,7 +26,7 @@ const CollagePage: React.FC<any> = (props) => {
   const period = timePeriod ?? '7day'
 
   // change limit if needed
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
+  const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
 
   const handleHeaderClick = () => router.push('/')
 
