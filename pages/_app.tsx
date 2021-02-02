@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
-import { css, Global } from '@emotion/core'
+import { css, Global } from '@emotion/react'
+import { ChakraProvider } from '@chakra-ui/react'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -12,7 +13,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           }
         `}
       />
-      <Component {...pageProps} />
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   )
 }

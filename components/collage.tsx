@@ -4,16 +4,20 @@ import styled from '@emotion/styled'
 
 import { Album } from './types'
 
-const ALBUM_SIZE = 300 // 174 for large
+const ALBUM_SIZE = 300 // 174 for large // 300
 
 interface Props {
   albums: Album[]
-  size?: number
+  rows: number
+  columns: number
+  shouldDisplayInfo: boolean
 }
 
 const Wrapper = styled.div<{ width: number; height: number }>`
   width: ${(props) => props.width * ALBUM_SIZE}px;
   height: ${(props) => props.height * ALBUM_SIZE}px;
+  max-height: '100%';
+  max-width: '100%';
 
   display: grid;
   grid-template-columns: repeat(${(props) => props.width}, ${ALBUM_SIZE}px);
@@ -26,15 +30,17 @@ const Label = styled.div`
   left: 0;
   display: inline-block;
   padding: 0 4px 2px 4px;
+  max-width: ${ALBUM_SIZE}px;
 
   background-color: rgba(0, 0, 0, 0.4);
   color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-family: sans-serif;
   letter-spacing: 0.03rem;
+  white-space: nowrap;
 `
 
-const Image = styled.div<{ src: string }>`
+const AlbumImage = styled.div<{ src: string }>`
   position: relative;
   margin: 0;
   background-image: url(${(props) => props.src});
@@ -42,22 +48,23 @@ const Image = styled.div<{ src: string }>`
   width: ${ALBUM_SIZE}px;
 `
 
-export const Collage: React.FC<Props> = ({ albums, size = 3 }) => {
+export const Collage: React.FC<Props> = ({
+  albums,
+  rows,
+  columns,
+  shouldDisplayInfo: displayInfo,
+}) => {
   const [shouldRenderImage, setShouldRenderImage] = useState(false)
   const [imgUrl, setImgUrl] = useState<string | null>(null)
-  const sizedAlbums = albums.slice(0, size * size)
+  const sizedAlbums = albums.slice(0, rows * columns)
 
-  const width = size
-  const height = size
+  const width = columns
+  const height = rows
   // large: 174px
   // extralarge: 300px
 
-  console.log('shouldrenderimg', shouldRenderImage)
-  console.log('imgurl', imgUrl)
-
   useEffect(() => {
     const node = document.getElementById('collage')
-    console.log('node', node)
     if (node) {
       domtoimage
         .toPng(node)
@@ -79,12 +86,14 @@ export const Collage: React.FC<Props> = ({ albums, size = 3 }) => {
   ) : (
     <Wrapper width={width} height={height} id="collage">
       {sizedAlbums.map((album) => (
-        <Image src={album.image[3]['#text']} key={album.name}>
-          <Label>
-            <div>{album.artist.name}</div>
-            <div>{album.name}</div>
-          </Label>
-        </Image>
+        <AlbumImage src={album.image[3]['#text']} key={album.name}>
+          {displayInfo && (
+            <Label>
+              <div>{album.artist.name}</div>
+              <div>{album.name}</div>
+            </Label>
+          )}
+        </AlbumImage>
       ))}
     </Wrapper>
   )
