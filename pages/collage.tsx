@@ -11,6 +11,7 @@ const LASTFM_API_KEY = process.env.LASTFM_API_KEY
 const CollagePage: React.FC<any> = (props) => {
   const [data, setData] = useState([])
   const [error, setError] = useState(null)
+  const [imgUrl, setImgUrl] = useState('')
   const router = useRouter()
 
   const rows = props.rows ?? router.query.rows
@@ -24,6 +25,8 @@ const CollagePage: React.FC<any> = (props) => {
   const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
 
   const handleHeaderClick = () => router.push('/')
+
+  const handleImgUrl = (url: string) => setImgUrl(url)
 
   useEffect(() => {
     fetch(url)
@@ -54,6 +57,7 @@ const CollagePage: React.FC<any> = (props) => {
       <Head>
         <title>collage.cool</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {imgUrl && <meta property="og:image" content={imgUrl} />}
       </Head>
       <Flex maxW="lg" p={16}>
         <VStack spacing="12px">
@@ -76,6 +80,7 @@ const CollagePage: React.FC<any> = (props) => {
           rows={rows}
           columns={columns}
           shouldDisplayInfo={shouldDisplayInfo}
+          handleImgUrl={handleImgUrl}
         />
       </Container>
     </Flex>

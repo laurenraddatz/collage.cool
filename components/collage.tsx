@@ -11,6 +11,7 @@ interface Props {
   rows: string
   columns: string
   shouldDisplayInfo: boolean
+  handleImgUrl: (url: string) => void
 }
 
 const Wrapper = styled.div<{ width: number; height: number }>`
@@ -55,6 +56,7 @@ export const Collage: React.FC<Props> = ({
   rows,
   columns,
   shouldDisplayInfo,
+  handleImgUrl,
 }) => {
   const [shouldRenderImage, setShouldRenderImage] = useState(false)
   const [imgUrl, setImgUrl] = useState<string | null>(null)
@@ -74,6 +76,7 @@ export const Collage: React.FC<Props> = ({
           setTimeout(() => {
             setShouldRenderImage(true)
           }, 1500)
+          handleImgUrl(dataUrl)
         })
         .catch((error) => {
           console.error('oops', error)
