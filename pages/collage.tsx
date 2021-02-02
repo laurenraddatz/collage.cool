@@ -47,7 +47,7 @@ const CollagePage: React.FC<any> = (props) => {
     <Flex
       direction="column"
       w="100%"
-      h="100vh"
+      minH="100vh"
       align="center"
       justify="flex-start"
       bg="#222"
