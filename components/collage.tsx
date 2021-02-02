@@ -1,15 +1,15 @@
 import domtoimage from 'dom-to-image'
-import React, { useLayoutEffect, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
 import { Album } from './types'
 
-const ALBUM_SIZE = 300 // 174 for large // 300
+const ALBUM_SIZE = 300 // 174 for large
 
 interface Props {
   albums: Album[]
-  rows: number
-  columns: number
+  rows: string
+  columns: string
   shouldDisplayInfo: boolean
 }
 
@@ -37,7 +37,9 @@ const Label = styled.div`
   font-size: 14px;
   font-family: sans-serif;
   letter-spacing: 0.03rem;
+  text-overflow: clip;
   white-space: nowrap;
+  overflow: hidden;
 `
 
 const AlbumImage = styled.div<{ src: string }>`
@@ -52,16 +54,14 @@ export const Collage: React.FC<Props> = ({
   albums,
   rows,
   columns,
-  shouldDisplayInfo: displayInfo,
+  shouldDisplayInfo,
 }) => {
   const [shouldRenderImage, setShouldRenderImage] = useState(false)
   const [imgUrl, setImgUrl] = useState<string | null>(null)
-  const sizedAlbums = albums.slice(0, rows * columns)
 
-  const width = columns
-  const height = rows
-  // large: 174px
-  // extralarge: 300px
+  const width = columns ? parseInt(columns.toString()) : 3
+  const height = rows ? parseInt(rows.toString()) : 3
+  const sizedAlbums = albums.slice(0, width * height)
 
   useEffect(() => {
     const node = document.getElementById('collage')
@@ -79,7 +79,7 @@ export const Collage: React.FC<Props> = ({
           console.error('oops', error)
         })
     }
-  }, [JSON.stringify(albums)])
+  }, [albums.length, rows, columns])
 
   return shouldRenderImage && imgUrl ? (
     <img src={imgUrl} />
@@ -87,7 +87,7 @@ export const Collage: React.FC<Props> = ({
     <Wrapper width={width} height={height} id="collage">
       {sizedAlbums.map((album) => (
         <AlbumImage src={album.image[3]['#text']} key={album.name}>
-          {displayInfo && (
+          {shouldDisplayInfo && (
             <Label>
               <div>{album.artist.name}</div>
               <div>{album.name}</div>

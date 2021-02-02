@@ -155,6 +155,7 @@ const Home = () => {
               type="text"
               placeholder="last.fm username"
               onChange={handleUsernameChange}
+              required={true}
             />
           </CustomForm>
           <Button
@@ -163,15 +164,25 @@ const Home = () => {
             variant="ghost"
             onClick={toggleOptions}
           >
-            {showOptions ? 'hide options' : 'show options'}
+            {showOptions ? 'Hide options' : 'Show options'}
           </Button>
-          <Button size="md" colorScheme="red" onClick={handleOptionsSubmit}>
+          <Button
+            size="md"
+            colorScheme="red"
+            onClick={handleOptionsSubmit}
+            isDisabled={user === ''}
+          >
             Generate
           </Button>
         </HStack>
         {showOptions && (
           <Flex w="100%">
-            <VStack spacing={8} align="flex-start" justify="flex-start" w="xs">
+            <VStack
+              spacing={8}
+              align="flex-start"
+              justify="flex-start"
+              w="100%"
+            >
               <FormControl id="rows">
                 <FormLabel>Rows</FormLabel>
                 <HStack spacing={4}>
@@ -221,7 +232,9 @@ const Home = () => {
                   onChange={handleTimePeriodChange}
                 >
                   {Object.keys(timeOptions).map((timeOption) => (
-                    <option value={timeOption}>{timeOption}</option>
+                    <option key={timeOption} value={timeOption}>
+                      {timeOption}
+                    </option>
                   ))}
                 </Select>
               </FormControl>

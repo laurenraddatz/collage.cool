@@ -1,5 +1,6 @@
 import { withRouter, useRouter } from 'next/router'
 import Head from 'next/head'
+import { GetServerSideProps } from 'next'
 import React, { useEffect, useState } from 'react'
 import { Flex, Text, VStack, Container } from '@chakra-ui/react'
 
@@ -12,18 +13,12 @@ const CollagePage: React.FC<any> = (props) => {
   const [error, setError] = useState(null)
   const router = useRouter()
 
-  console.log('props', props)
-  console.log('router', router.query)
-  const { user, timePeriod, displayInfo } = router.query
-
-  if (!user) {
-    return null
-  }
-
-  const rows = parseInt(router.query.rows.toString())
-  const columns = parseInt(router.query.columns.toString())
-  const shouldDisplayInfo = displayInfo.toString() === 'true'
-  const period = timePeriod ?? '7day'
+  const rows = props.rows ?? router.query.rows
+  const columns = props.columns ?? router.query.columns
+  const shouldDisplayInfo =
+    props.displayInfo === 'true' ?? router.query.displayInfo === 'true'
+  const period = props.timePeriod ?? router.query.timePeriod
+  const user = props.user ?? router.query.user
 
   // change limit if needed
   const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
@@ -42,6 +37,10 @@ const CollagePage: React.FC<any> = (props) => {
         }
       )
   }, [url])
+
+  if (!user) {
+    return null
+  }
 
   return (
     <Flex
@@ -84,3 +83,11 @@ const CollagePage: React.FC<any> = (props) => {
 }
 
 export default withRouter(CollagePage)
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { user, rows, columns, timePeriod, displayInfo } = context.query
+
+  return {
+    props: { user, rows, columns, timePeriod, displayInfo },
+  }
+}
