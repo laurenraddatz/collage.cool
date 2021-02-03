@@ -20,7 +20,6 @@ const CollagePage: React.FC<any> = (props) => {
   const period = props.timePeriod ?? router.query.timePeriod
   const user = props.user ?? router.query.user
 
-  // change limit if needed
   const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&limit=${100}&period=${period}&format=json`
 
   const handleHeaderClick = () => router.push('/')
