@@ -1,8 +1,7 @@
+import { Flex, Text, VStack, Container } from '@chakra-ui/react'
 import { withRouter, useRouter } from 'next/router'
-import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import React, { useEffect, useState } from 'react'
-import { Flex, Text, VStack, Container } from '@chakra-ui/react'
 
 import { Collage } from '../components/collage'
 
@@ -54,11 +53,6 @@ const CollagePage: React.FC<any> = (props) => {
       justify="flex-start"
       bg="#222"
     >
-      <Head>
-        <title>collage.cool</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        {imgUrl && <meta property="og:image" content={imgUrl} />}
-      </Head>
       <Flex maxW="lg" p={16}>
         <VStack spacing="12px">
           <Text

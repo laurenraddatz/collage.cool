@@ -1,10 +1,8 @@
-import { Router, useRouter } from 'next/router'
-import Head from 'next/head'
-import React, { MouseEvent, useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
-  Box,
   Flex,
   Button,
   Slider,
@@ -122,10 +120,6 @@ const Home = () => {
 
   return (
     <Flex direction="column" w="100%" align="center" justify="center">
-      <Head>
-        <title>collage.cool</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
       <Center maxW="lg" p={16}>
         <VStack spacing="12px">
           <Text
