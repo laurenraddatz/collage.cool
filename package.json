@@ -29,7 +29,6 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@emotion/babel-plugin": "^11.1.2",
-    "@types/dom-to-image": "^2.6.2",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",

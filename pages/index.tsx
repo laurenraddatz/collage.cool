@@ -70,7 +70,7 @@ const Input = styled.input`
 `
 
 const timeOptions = {
-  '7 days': '7day',
+  '1 week': '7day',
   '1 month': '1month',
   '3 months': '3month',
   '6 months': '6month',
@@ -82,7 +82,7 @@ type TimeValue = typeof timeOptions[TimeKey]
 
 const Home = () => {
   const [user, setUser] = useState('')
-  const [timePeriod, setTimePeriod] = useState<TimeValue>(timeOptions['7 days'])
+  const [timePeriod, setTimePeriod] = useState<TimeValue>(timeOptions['1 week'])
   const [rows, setRows] = useState(3)
   const [columns, setColumns] = useState(3)
   const [displayInfo, setDisplayInfo] = useState(true)
@@ -222,7 +222,7 @@ const Home = () => {
                   colorScheme="blackAlpha"
                   focusBorderColor="black"
                   icon={<ChevronDownIcon />}
-                  defaultValue={timeOptions['7 days']}
+                  defaultValue={timeOptions['1 week']}
                   onChange={handleTimePeriodChange}
                 >
                   {Object.keys(timeOptions).map((timeOption) => (
