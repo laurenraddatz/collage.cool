@@ -1,4 +1,4 @@
-import { Flex, Text, VStack, Container } from '@chakra-ui/react'
+import { Flex, Heading, VStack, Container } from '@chakra-ui/react'
 import { withRouter, useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import React, { useEffect, useState } from 'react'
@@ -21,7 +21,7 @@ const CollagePage: React.FC<any> = (props) => {
   const user = props.user ?? router.query.user
 
   // change limit if needed
-  const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&period=${period}&format=json`
+  const url = `//ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${user}&api_key=${LASTFM_API_KEY}&limit=${100}&period=${period}&format=json`
 
   const handleHeaderClick = () => router.push('/')
 
@@ -55,7 +55,7 @@ const CollagePage: React.FC<any> = (props) => {
     >
       <Flex maxW="lg" p={16}>
         <VStack spacing="12px">
-          <Text
+          <Heading
             style={{ cursor: 'pointer' }}
             fontSize="5xl"
             color="black"
@@ -63,9 +63,10 @@ const CollagePage: React.FC<any> = (props) => {
             fontWeight="600"
             backgroundColor="#f5e3e7"
             onClick={handleHeaderClick}
+            isTruncated
           >
             &nbsp; collage.cool &nbsp;
-          </Text>
+          </Heading>
         </VStack>
       </Flex>
       <Container maxW="80ch">

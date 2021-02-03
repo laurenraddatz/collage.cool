@@ -18,6 +18,8 @@ import {
   VStack,
   Link,
   HStack,
+  Stack,
+  Heading,
 } from '@chakra-ui/react'
 
 export const Main = styled.div`
@@ -122,7 +124,7 @@ const Home = () => {
     <Flex direction="column" w="100%" align="center" justify="center">
       <Center maxW="lg" p={16}>
         <VStack spacing="12px">
-          <Text
+          <Heading
             style={{ cursor: 'pointer' }}
             fontSize="5xl"
             color="black"
@@ -130,10 +132,11 @@ const Home = () => {
             fontWeight="600"
             backgroundColor="#f5e3e7"
             onClick={handleHeaderClick}
+            isTruncated
           >
             &nbsp; collage.cool &nbsp;
-          </Text>
-          <Text>
+          </Heading>
+          <Text align="center">
             Generate a collage from your{' '}
             <Link color="#b8060f" href="https://www.last.fm">
               Last.fm
@@ -143,7 +146,7 @@ const Home = () => {
         </VStack>
       </Center>
       <VStack bg="white" spacing={8}>
-        <HStack spacing="16px">
+        <Stack spacing="16px" direction={['column', 'row']}>
           <CustomForm onSubmit={handleUsernameSubmit}>
             <Input
               type="text"
@@ -168,7 +171,7 @@ const Home = () => {
           >
             Generate
           </Button>
-        </HStack>
+        </Stack>
         {showOptions && (
           <Flex w="100%">
             <VStack
